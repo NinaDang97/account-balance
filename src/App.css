@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css?family=Heebo');
+
+*{ 
+  margin: 0;
+  padding: 0;
+  font-family: 'Heebo', sans-serif;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  background: #AED6F1;
+}
+
+.navbar a {
+  cursor: pointer;
+}
+
+.form {
+  padding: 25px;
+  width: 50%;
+  margin: 25px auto;
+  border: 3px solid rgb(34, 103, 150);
+}
+
+.form button{
+  border: none;
+  cursor: pointer;
+  color: grey;
+}
+
+.form button[type='button'] {
+  float: right;
+  display: block;
+  background: transparent;
+}
+
+.form input{
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid rgb(173, 168, 168);
+}
+
+.form button[type='submit']{
+  margin-top: 25px;
+  background: rgb(34, 103, 150);
+  color: white;
+  padding: 10px 25px;
+}
+
+.transaction_list{
+  padding: 20px;
+}
+
+.transaction_list h4{
+  background: #AED6F1;
+  margin-top: 25px;
+}
+
+.transaction_list .detail_list,
+.transaction_list .detail_list > div {
+  padding: 5px 0;
+}
+
+.transaction_list .detail_list > div {
+  border-bottom: 1px solid rgb(224, 215, 215);
+}
+
+.transaction_list .detail_list .transaction_item:last-child {
+  border: none;
+}
+
+.transaction_list .transaction_item{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.transaction_list .transaction_item .amount{
+  font-weight: 800;
+}
