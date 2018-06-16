@@ -44,10 +44,27 @@ class App extends Component {
     showForm: false
   }
 
+  componentDidMount(){  
+    const transactionList = [...this.state.transactionList];  
+    const balance = this.calculateBalance(transactionList);    
+    this.setState({balance});    
+  }
+
+  calculateBalance = (transactionList) => {
+    let balance = 0;
+    for(const transDate of transactionList){
+      const keyDate = Object.keys(transDate)[0];
+      for(const trans of transDate[keyDate]){
+        trans.type === 'income' ? balance += trans.amount : balance -= trans.amount
+      }
+    }
+    return balance;
+  }
+
   addTransaction = (newTrans) => {
     //Add new transaction to existing list
     let index = -1;
-    let transactionList = [...this.state.transactionList];
+    const transactionList = [...this.state.transactionList];
     const newTransDate = newTrans.date;
     //Find if the date exists or not to group into array
     for(const trans of transactionList){
@@ -62,6 +79,8 @@ class App extends Component {
       newObj[newTransDate] = [newTrans];
       transactionList.push(newObj);
     }
+    const balance = this.calculateBalance(transactionList);    
+    this.setState({transactionList, balance});
   }
 
   showFormFunc = (showOrHide) => {
