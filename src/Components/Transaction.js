@@ -48,7 +48,10 @@ class Transaction extends Component {
             </div>
         : control = 
         <div>
-            <button onClick={() => this.setState({isEdit: false})}>Cancel</button>
+            <button onClick={() => this.setState({
+                isEdit: false,  
+                description: this.props.description,
+                amount: this.props.amount})}>Cancel</button>
             <button onClick={() => {this.props.onSave(this.props.id, this.state.description, this.state.amount); this.setState({isEdit: false})}}>Save</button>
         </div>
         return control;

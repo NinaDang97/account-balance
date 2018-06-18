@@ -95,8 +95,9 @@ class App extends Component {
       let keyDate = Object.keys(transDate)[0];
       let temptList = transDate[keyDate].filter((trans) => trans.id !== id);
       transDate[keyDate] = temptList;
-    } 
-    this.setState({transactionList});
+    }
+    const balance = this.calculateBalance(transactionList);  
+    this.setState({balance, transactionList});
   }
 
   onSave = (id, description, amount) => {

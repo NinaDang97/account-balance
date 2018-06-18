@@ -15,13 +15,9 @@ class Form extends Component {
     }
 
     handleChangeInput = (event) => {
-        if(event.target.name === 'amount') {
-            this.setState({amount: event.target.value})
-        } else {
-            this.setState({
-                [event.target.name]: event.target.value
-            })
-        }        
+        this.setState({
+            [event.target.name]: event.target.value
+        })
     }
 
     handleSubmit = (event) => {
