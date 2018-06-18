@@ -89,6 +89,31 @@ class App extends Component {
     })
   }
 
+  deleteTransaction = (id) => {
+    let transactionList = [...this.state.transactionList];
+    for(const transDate of transactionList){
+      let keyDate = Object.keys(transDate)[0];
+      let temptList = transDate[keyDate].filter((trans) => trans.id !== id);
+      transDate[keyDate] = temptList;
+    } 
+    this.setState({transactionList});
+  }
+
+  onSave = (id, description, amount) => {
+    let transactionList = [...this.state.transactionList];
+    for(const transDate of transactionList){
+      let keyDate = Object.keys(transDate)[0];
+      for(const trans of transDate[keyDate]){
+        if(trans.id === id){
+          trans.description = description;
+          trans.amount = parseFloat(amount);
+        }
+      }
+    }
+    const balance = this.calculateBalance(transactionList);
+    this.setState({balance, transactionList}); 
+  }
+
   render() {
     const {balance, showForm} = this.state;
 
@@ -97,7 +122,7 @@ class App extends Component {
         <Navbar balance={balance} showFormFunc={this.showFormFunc} />
         {showForm && <Form showFormFunc={this.showFormFunc} addTransaction={this.addTransaction} />}
 
-        <TransactionDate list={this.state.transactionList} />
+        <TransactionDate delete={this.deleteTransaction} onSave={this.onSave} list={this.state.transactionList} />
       </div>
     );
   }

@@ -10,13 +10,13 @@ class Form extends Component {
             time: '',
             type: 'income',
             description: '',
-            amount: 0
+            amount: ''
         }
     }
 
     handleChangeInput = (event) => {
         if(event.target.name === 'amount') {
-            this.setState({amount: Number(event.target.value)})
+            this.setState({amount: event.target.value})
         } else {
             this.setState({
                 [event.target.name]: event.target.value
@@ -28,13 +28,16 @@ class Form extends Component {
         event.preventDefault();
         const day = new Date();
         this.setState((prevState) => {
-            this.props.addTransaction({...this.state, date: day.getDate() + '/' + (day.getMonth() + 1) + '/' + day.getFullYear(), time: day.getHours() + ':' + day.getMinutes()});
+            this.props.addTransaction({...this.state, 
+                date: day.getDate() + '/' + (day.getMonth() + 1) + '/' + day.getFullYear(), time: day.getHours() + ':' + day.getMinutes(),
+                amount: Number(prevState.amount)
+            });
             return {
                 id: prevState.id + 1,
                 date: '',
                 type: 'income',
                 description: '',
-                amount: 0
+                amount: ''
             }
         })
     }

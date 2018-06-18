@@ -6,7 +6,7 @@ const TransactionDate = (props) => {
     const renderList = props.list.map((val, i) => (
         <div key={i}>
             <h4>{Object.keys(val)[0]}</h4>
-            <TransactionList values={val[Object.keys(val)[0]]} />
+            <TransactionList delete={props.delete} onSave={props.onSave} values={val[Object.keys(val)[0]]} />
         </div>
     ))
     return (

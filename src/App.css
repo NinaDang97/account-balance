@@ -36,7 +36,7 @@
   background: transparent;
 }
 
-.form input{
+input{
   width: 100%;
   border: none;
   border-bottom: 1px solid rgb(173, 168, 168);
@@ -67,13 +67,49 @@
   border-bottom: 1px solid rgb(224, 215, 215);
 }
 
-.transaction_list .detail_list .transaction_item:last-child {
+.detail_list .transaction_item:last-child {
   border: none;
+}
+
+.transaction_item div:nth-child(2),
+.transaction_item div:nth-child(3),
+.transaction_item div:nth-child(4) 
+{
+  text-align: center;
+}
+
+.control {
+  position: relative;
+  cursor: pointer;
+}
+
+div.control:hover div.controlSystem{
+  display: inline-block;
+}
+
+.control div.controlSystem {
+  display: none;
+  position: absolute;
+  right: 18%;
+  top: 0;
+  width: 30%;
+  background: rgb(224, 221, 221);
+  color: black;
+}
+
+.control div.controlSystem div {
+  text-align: left;
+  padding-left: 15px;
+}
+
+.control div.controlSystem div:hover{
+  background: rgb(34, 103, 150);
+  color: white;
 }
 
 .transaction_list .transaction_item{
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
 .transaction_list .transaction_item .amount{
