@@ -45,6 +45,7 @@ class App extends Component {
   }
 
   componentDidMount(){  
+    //before first rendering, calculate the balance of current transactionList
     const transactionList = [...this.state.transactionList];  
     const balance = this.calculateBalance(transactionList);    
     this.setState({balance});    
@@ -52,11 +53,13 @@ class App extends Component {
 
   calculateBalance = (transactionList) => {
     let balance = 0;
-    for(const transDate of transactionList){
-      const keyDate = Object.keys(transDate)[0];
-      for(const trans of transDate[keyDate]){
-        trans.type === 'income' ? balance += trans.amount : balance -= trans.amount
-      }
+    for(const transDate of transactionList){ //loop through the list to extract Date Transaction object with date key
+      const keyDate = Object.keys(transDate)[0]; //return array, there's only one date key in each Date Transaction object
+      if(keyDate !== undefined){ //in case {}, there is no key property
+        for(const trans of transDate[keyDate]){
+          trans.type === 'income' ? balance += trans.amount : balance -= trans.amount
+        }
+      }      
     }
     return balance;
   }
@@ -93,14 +96,16 @@ class App extends Component {
     let transactionList = [...this.state.transactionList];
     for(const transDate of transactionList){
       let keyDate = Object.keys(transDate)[0];
-      let temptList = transDate[keyDate].filter((trans) => trans.id !== id);
-      transDate[keyDate] = temptList;
+      if(keyDate !== undefined){ //in case the Date Transaction value is empty-obj {} 
+        let temptList = transDate[keyDate].filter((trans) => trans.id !== id); //after delete, it may return empty array (no Date Transaction value)
+        temptList.length !== 0 ? transDate[keyDate] = temptList : delete transDate[keyDate] // return {}
+      }      
     }
     const balance = this.calculateBalance(transactionList);  
     this.setState({balance, transactionList});
   }
 
-  onSave = (id, description, amount) => {
+  onSave = (id, description, amount) => { 
     let transactionList = [...this.state.transactionList];
     for(const transDate of transactionList){
       let keyDate = Object.keys(transDate)[0];

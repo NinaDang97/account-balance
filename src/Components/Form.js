@@ -6,8 +6,6 @@ class Form extends Component {
         super(props);
         this.state = {
             id: 3,
-            date: '',
-            time: '',
             type: 'income',
             description: '',
             amount: ''
@@ -26,7 +24,7 @@ class Form extends Component {
         this.setState((prevState) => {
             this.props.addTransaction({...this.state, 
                 date: day.getDate() + '/' + (day.getMonth() + 1) + '/' + day.getFullYear(), time: day.getHours() + ':' + day.getMinutes(),
-                amount: Number(prevState.amount)
+                amount: parseFloat(prevState.amount)
             });
             return {
                 id: prevState.id + 1,
