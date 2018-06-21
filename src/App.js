@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Navbar from './Components/Navbar';
-import Form from './Components/Form';
-import TransactionDate from './Components/TransactionDate';
+import Navbar from './Components/Navbar/index';
+import Form from './Components/Form/index';
+import TransactionDate from './Components/Main/index';
 import './App.css';
 
 class App extends Component {
